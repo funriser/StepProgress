@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StepProgressView">
+        <!-- Common customization -->
+        <attr name="stepsCount" format="integer" />
+        <attr name="colorInactive" format="color" />
+        <!-- Node customization -->
+        <attr name="nodeHeight" format="dimension" />
+        <attr name="nodeColor" format="color" />
+        <!-- Arc customization -->
+        <attr name="arcWidth" format="dimension" />
+        <attr name="arcPadding" format="dimension" />
+        <attr name="arcColor" format="color" />
+        <!-- Text customization -->
+        <attr name="titlesEnabled" format="boolean" />
+        <attr name="textTitlePadding" format="dimension" />
+        <attr name="textNodeSize" format="dimension" />
+        <attr name="textNodeColor" format="color" />
+        <attr name="textNodeTitleSize" format="dimension" />
+        <attr name="textNodeTitleColor" format="color" />
+    </declare-styleable>
+</resources>

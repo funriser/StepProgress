@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.funrisestudio.stepprogress.StepProgressView
+        android:id="@+id/vStepProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:stepsCount="4"
+        app:arcPadding="10dp"
+        app:nodeHeight="50dp"
+        app:titlesEnabled="true"
+        app:textNodeColor="@color/colorAccent"
+        app:textNodeSize="18sp"
+        app:textNodeTitleColor="@color/colorPrimary"
+        app:textNodeTitleSize="14sp"
+        app:textTitlePadding="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <Button
+        android:id="@+id/btnMarkUndone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark undone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnMarkDone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vStepProgress" />
+
+    <Button
+        android:id="@+id/btnMarkDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mark done"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnNext"
+        app:layout_constraintStart_toEndOf="@id/btnMarkUndone"
+        app:layout_constraintTop_toBottomOf="@id/vStepProgress" />
+
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnMarkDone"
+        app:layout_constraintTop_toBottomOf="@id/vStepProgress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
