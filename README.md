@@ -12,7 +12,7 @@ allprojects {
     }
 }
 ```
-Add the dependency
+Add the dependency:
 ```gradle
 dependencies {
     implementation 'com.github.funriser:StepProgress:0.1.0'
