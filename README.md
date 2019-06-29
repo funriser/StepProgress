@@ -80,7 +80,7 @@ btnNext.setOnClickListener {
         app:textNodeTitleColor="@color/colorPrimary" <!-- color of a title above the step -->
         app:textNodeTitleSize="14sp" <!-- size of a title above the step -->
         app:textTitlePadding="5dp" <!-- padding between title and step below it -->
-        app:colorInactive="5dp" <!-- color of inactive views -->
+        app:colorInactive="@color/colorGrey" <!-- color of inactive views -->
         app:nodeColor="@color/colorPrimary" <!-- color of step circle -->
         app:arcWidth="2dp" <!-- width of the arc between steps -->
         app:arcColor="@color/colorAccent" <!-- color of the arc between steps -->
