@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
 
@@ -58,7 +60,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.StepProgressView,
-                0, 0).apply {
+            0, 0).apply {
             try {
                 //common setup
                 stepsCount = getInteger(R.styleable.StepProgressView_stepsCount, stepsCount)
@@ -218,7 +220,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
     //Text overflow margin is calculated to fit text in a node view
     private fun resolveTextOverflow(nodeSize: Int) {
         textOverflow = if (titlesEnabled) {
-             nodeSize
+            nodeSize
         } else {
             0
         }
@@ -505,6 +507,42 @@ class StepProgressView : ViewGroup, View.OnClickListener {
         return stepProgress.isAllDone()
     }
 
+    fun setTextTitlePadding(@DimenRes size: Int) {
+        textTitlePadding = resources.getDimension(size)
+        resetView()
+        invalidate()
+    }
+
+    fun setNodeTitleSize(@DimenRes size: Int) {
+        textNodeTitleSize = resources.getDimensionPixelSize(size)
+        resetView()
+        invalidate()
+    }
+
+    fun setTextNodeSize(@DimenRes size: Int) {
+        textNodeSize = resources.getDimensionPixelSize(size)
+        resetView()
+        invalidate()
+    }
+
+    fun setNodeHeight(@DimenRes size: Int) {
+        nodeHeight = resources.getDimension(size)
+        resetView()
+        invalidate()
+    }
+
+    fun setTextNodeColor(@ColorRes color: Int) {
+        textNodeColor = ContextCompat.getColor(context, color)
+        resetView()
+        invalidate()
+    }
+
+    fun setNodeTitleColor(@ColorRes color: Int) {
+        textNodeTitleColor = ContextCompat.getColor(context, color)
+        resetView()
+        invalidate()
+    }
+
     private fun getDefaultTitles(): List<String> {
         return mutableListOf<String>().apply {
             for (i in 0 until stepsCount) {
@@ -654,8 +692,5 @@ class StepProgressView : ViewGroup, View.OnClickListener {
 
         private const val STEP_TITLE_TAG = "step_title"
 
-        private const val TAG = "StepProgressView"
-
     }
-
 }
