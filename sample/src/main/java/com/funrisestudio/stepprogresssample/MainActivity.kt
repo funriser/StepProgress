@@ -1,5 +1,6 @@
 package com.funrisestudio.stepprogresssample
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -24,6 +25,16 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
             ).show()
         }
+
+        vStepProgress.setNodeTitleSize(50)
+        vStepProgress.setTextTitlePadding(20f)
+
+        vStepProgress.setNodeTitleColor(Color.RED)
+        vStepProgress.setTextNodeColor(Color.CYAN)
+
+        vStepProgress.setNodeHeight(100f)
+        vStepProgress.setTextNodeSize(50)
+
         btnNext.setOnClickListener {
             val isFinished = vStepProgress.nextStep(true)
             if (isFinished) {

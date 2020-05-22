@@ -12,8 +12,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
 
@@ -507,40 +505,46 @@ class StepProgressView : ViewGroup, View.OnClickListener {
         return stepProgress.isAllDone()
     }
 
-    fun setTextTitlePadding(@DimenRes size: Int) {
-        textTitlePadding = resources.getDimension(size)
+    fun setTextTitlePadding(size: Float) {
+        textTitlePadding = SViewUtils.toPx(size, context)
         resetView()
         invalidate()
     }
 
-    fun setNodeTitleSize(@DimenRes size: Int) {
-        textNodeTitleSize = resources.getDimensionPixelSize(size)
+    fun setNodeTitleSize(size: Int) {
+        textNodeTitleSize = SViewUtils.toPx(size, context)
         resetView()
         invalidate()
     }
 
-    fun setTextNodeSize(@DimenRes size: Int) {
-        textNodeSize = resources.getDimensionPixelSize(size)
+    fun setTextNodeSize(size: Int) {
+        textNodeSize = SViewUtils.toPx(size, context)
         resetView()
         invalidate()
     }
 
-    fun setNodeHeight(@DimenRes size: Int) {
-        nodeHeight = resources.getDimension(size)
+    fun setNodeHeight(size: Float) {
+        nodeHeight = SViewUtils.toPx(size, context)
         resetView()
         invalidate()
     }
 
-    fun setTextNodeColor(@ColorRes color: Int) {
-        textNodeColor = ContextCompat.getColor(context, color)
-        resetView()
-        invalidate()
+    fun setTextNodeColor(@ColorInt color: Int) {
+        textNodeColor = color
+        children.filter { !it.tag.toString().contains(NODE_TAG_PREFIX.toRegex()) }.forEach {
+            if (it is TextView) {
+                it.setTextColor(color)
+            }
+        }
     }
 
-    fun setNodeTitleColor(@ColorRes color: Int) {
-        textNodeTitleColor = ContextCompat.getColor(context, color)
-        resetView()
-        invalidate()
+    fun setNodeTitleColor(@ColorInt color: Int) {
+        textNodeTitleColor = color
+        children.filter { it.tag != STEP_TITLE_TAG }.forEach {
+            if (it is TextView) {
+                it.setTextColor(color)
+            }
+        }
     }
 
     private fun getDefaultTitles(): List<String> {
