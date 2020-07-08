@@ -543,8 +543,8 @@ class StepProgressView : ViewGroup, View.OnClickListener {
      */
     fun setNodeTextColor(@ColorInt color: Int) {
         textNodeColor = color
-        children.filter { !it.tag.toString().contains(NODE_TAG_PREFIX.toRegex()) }.forEach {
-            if (it is TextView) {
+        children.forEach {
+            if (it is TextView && it.tag.toString().contains(NODE_TAG_PREFIX.toRegex())) {
                 it.setTextColor(color)
             }
         }
