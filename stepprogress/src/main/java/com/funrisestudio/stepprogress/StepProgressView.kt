@@ -505,31 +505,43 @@ class StepProgressView : ViewGroup, View.OnClickListener {
         return stepProgress.isAllDone()
     }
 
+    /**
+     * Change title text padding
+     */
     fun setTextTitlePadding(size: Float) {
-        textTitlePadding = SViewUtils.toPx(size, context)
-        resetView()
-        invalidate()
+        textTitlePadding = size
+        requestLayout()
     }
 
+    /**
+     * Change node title text size
+     */
     fun setNodeTitleSize(size: Int) {
-        textNodeTitleSize = SViewUtils.toPx(size, context)
+        textNodeTitleSize = size
         resetView()
         invalidate()
     }
 
-    fun setTextNodeSize(size: Int) {
-        textNodeSize = SViewUtils.toPx(size, context)
-        resetView()
-        invalidate()
+    /**
+     * Change text node  size
+     */
+    fun setNodeTextSize(size: Int) {
+        textNodeSize = size
+        requestLayout()
     }
 
+    /**
+     * Change node height
+     */
     fun setNodeHeight(size: Float) {
-        nodeHeight = SViewUtils.toPx(size, context)
-        resetView()
-        invalidate()
+        nodeHeight = size
+        requestLayout()
     }
 
-    fun setTextNodeColor(@ColorInt color: Int) {
+    /**
+     * Change node text color
+     */
+    fun setNodeTextColor(@ColorInt color: Int) {
         textNodeColor = color
         children.filter { !it.tag.toString().contains(NODE_TAG_PREFIX.toRegex()) }.forEach {
             if (it is TextView) {
@@ -538,10 +550,13 @@ class StepProgressView : ViewGroup, View.OnClickListener {
         }
     }
 
+    /**
+     * Change node title color
+     */
     fun setNodeTitleColor(@ColorInt color: Int) {
         textNodeTitleColor = color
-        children.filter { it.tag != STEP_TITLE_TAG }.forEach {
-            if (it is TextView) {
+        children.forEach {
+            if (it is TextView && it.tag == STEP_TITLE_TAG) {
                 it.setTextColor(color)
             }
         }
