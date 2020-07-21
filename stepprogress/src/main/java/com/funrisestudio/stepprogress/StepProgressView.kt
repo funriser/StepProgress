@@ -29,12 +29,16 @@ class StepProgressView : ViewGroup, View.OnClickListener {
 
     @ColorInt
     private var textNodeTitleColor = ContextCompat.getColor(context, R.color.colorPrimary)
+
     @ColorInt
     private var textNodeColor = ContextCompat.getColor(context, R.color.colorAccent)
+
     @ColorInt
     private var nodeColor = ContextCompat.getColor(context, R.color.colorPrimary)
+
     @ColorInt
     private var arcColor = ContextCompat.getColor(context, R.color.colorAccent)
+
     @ColorInt
     private var colorInactive = ContextCompat.getColor(context, R.color.colorGrey)
 
@@ -57,8 +61,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
     constructor(context: Context) : super(context) { init() }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        context.theme.obtainStyledAttributes(attrs, R.styleable.StepProgressView,
-            0, 0).apply {
+        context.theme.obtainStyledAttributes(attrs, R.styleable.StepProgressView, 0, 0).apply {
             try {
                 //common setup
                 stepsCount = getInteger(R.styleable.StepProgressView_stepsCount, stepsCount)
@@ -122,6 +125,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
     private var titleTextMaxHeight = 0
     private var titleTextMaxWidth = 0
     private var textOverflow = 0
+
     //flag to show if overflow mode was apply to view
     //overflow happen when requested nodes size does not fit into layout
     private var hasNodeOverflow = false
@@ -169,7 +173,8 @@ class StepProgressView : ViewGroup, View.OnClickListener {
                     //
                     //measures arc view
                     val arcWSpec = MeasureSpec.makeMeasureSpec(arcWidth, MeasureSpec.EXACTLY)
-                    val arcHSpec = MeasureSpec.makeMeasureSpec(arcHeight.toInt(), MeasureSpec.EXACTLY)
+                    val arcHSpec =
+                        MeasureSpec.makeMeasureSpec(arcHeight.toInt(), MeasureSpec.EXACTLY)
                     if (!hasNodeOverflow) {
                         (it.layoutParams as LinearLayout.LayoutParams).setMargins(
                             arcPadding.toInt(), 0, arcPadding.toInt(), 0
@@ -320,15 +325,23 @@ class StepProgressView : ViewGroup, View.OnClickListener {
                 //step
                 it is TextView && (it.tag as String != STEP_TITLE_TAG) -> {
                     val centerPadding = (stepWidth - it.measuredWidth) / 2
-                    it.layout(left + it.marginLeft + centerPadding, top + it.marginTop,
-                        left + it.measuredWidth + centerPadding, top + it.measuredHeight + it.marginTop)
+                    it.layout(
+                        left + it.marginLeft + centerPadding,
+                        top + it.marginTop,
+                        left + it.measuredWidth + centerPadding,
+                        top + it.measuredHeight + it.marginTop
+                    )
                     left += it.measuredWidth + it.marginRight + it.marginLeft
                 }
                 //arc
                 else -> {
                     val arcTop = ((b - t) - it.measuredHeight) / 2
-                    it.layout(left + it.marginStart, arcTop + titleTextMaxHeight / 2,
-                        left + it.measuredWidth - it.marginEnd, arcTop + it.measuredHeight + titleTextMaxHeight / 2)
+                    it.layout(
+                        left + it.marginStart,
+                        arcTop + titleTextMaxHeight / 2,
+                        left + it.measuredWidth - it.marginEnd,
+                        arcTop + it.measuredHeight + titleTextMaxHeight / 2
+                    )
                     left += it.measuredWidth
                 }
             }
@@ -519,7 +532,6 @@ class StepProgressView : ViewGroup, View.OnClickListener {
     fun setNodeTitleSize(size: Int) {
         textNodeTitleSize = size
         resetView()
-        invalidate()
     }
 
     /**
@@ -527,7 +539,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
      */
     fun setNodeTextSize(size: Int) {
         textNodeSize = size
-        requestLayout()
+        resetView()
     }
 
     /**
@@ -538,28 +550,45 @@ class StepProgressView : ViewGroup, View.OnClickListener {
         requestLayout()
     }
 
-    /**
-     * Change node text color
-     */
-    fun setNodeTextColor(@ColorInt color: Int) {
-        textNodeColor = color
-        children.forEach {
-            if (it is TextView && it.tag.toString().contains(NODE_TAG_PREFIX.toRegex())) {
-                it.setTextColor(color)
-            }
-        }
-    }
 
     /**
      * Change node title color
      */
     fun setNodeTitleColor(@ColorInt color: Int) {
         textNodeTitleColor = color
-        children.forEach {
-            if (it is TextView && it.tag == STEP_TITLE_TAG) {
-                it.setTextColor(color)
-            }
-        }
+        resetView()
+    }
+
+    /**
+     * Change node text color
+     */
+    fun setNodeTextColor(@ColorInt color: Int) {
+        textNodeColor = color
+        resetView()
+    }
+
+    /**
+     * Change node color
+     */
+    fun setNodeColor(@ColorInt color: Int) {
+        nodeColor = color
+        resetView()
+    }
+
+    /**
+     * Change node arc color
+     */
+    fun setNodeArcColor(@ColorInt color: Int) {
+        arcColor = color
+        resetView()
+    }
+
+    /**
+     * Change node color inactive
+     */
+    fun setNodeColorInactive(@ColorInt color: Int) {
+        colorInactive = color
+        resetView()
     }
 
     private fun getDefaultTitles(): List<String> {
