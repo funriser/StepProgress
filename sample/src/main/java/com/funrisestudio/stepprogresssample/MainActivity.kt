@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
             ).show()
         }
+
         btnNext.setOnClickListener {
             val isFinished = vStepProgress.nextStep(true)
             if (isFinished) {
