@@ -572,6 +572,9 @@ class StepProgressView : ViewGroup, View.OnClickListener {
      */
     fun setNodeColor(@ColorInt color: Int) {
         nodeColor = color
+        ovalStrokeDrawable = drawableHelper.createStrokeOvalDrawable(context, nodeColor)
+        ovalDrawable = drawableHelper.createOvalDrawable(nodeColor)
+        checkedDrawable = drawableHelper.createCheckDrawable(context, nodeColor)
         resetView()
     }
 
@@ -580,6 +583,7 @@ class StepProgressView : ViewGroup, View.OnClickListener {
      */
     fun setNodeArcColor(@ColorInt color: Int) {
         arcColor = color
+        arcActiveDrawable = ColorDrawable(arcColor)
         resetView()
     }
 
@@ -588,6 +592,8 @@ class StepProgressView : ViewGroup, View.OnClickListener {
      */
     fun setNodeColorInactive(@ColorInt color: Int) {
         colorInactive = color
+        ovalStrokeInactiveDrawable = drawableHelper.createStrokeOvalDrawable(context, colorInactive)
+        arcInactiveDrawable = ColorDrawable(colorInactive)
         resetView()
     }
 
